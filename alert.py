@@ -23,6 +23,7 @@ def alert():
         from msg import alert_msg_handler
         for alert_json in content['alerts']:
             parse_msg = alert_msg_handler(alert_json)
+            parse_msg = parse_msg.replace("_","")
             logger.info(f"post json == > {parse_msg}")
             bot.sendMessage(chat_id=chat_id, text=parse_msg, parse_mode="Markdown")
     except:
