@@ -24,6 +24,8 @@ def alert():
         for alert_json in content['alerts']:
             parse_msg = alert_msg_handler(alert_json)
             parse_msg = parse_msg.replace("_","")
+            parse_msg = parse_msg.replace("[FIRING]", ":warning:")
+            parse_msg = parse_msg.replace("[RESOLVED]", ":white_check_mark:")
             logger.info(f"post json == > {parse_msg}")
             bot.sendMessage(chat_id=chat_id, text=parse_msg, parse_mode="Markdown")
     except:
