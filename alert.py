@@ -18,17 +18,19 @@ def alert():
     try:
         import telegram
         # Initial bot by Telegram access token
-        bot = telegram.Bot(token="botToken")
-        chat_id = "-chatID"
+        bot = telegram.Bot(token="1185184098:AAFrad7huLK1PxJnWuXl9HA--dL4fyZwjj4")
+        chat_id = "-442502302"
         from msg import alert_msg_handler
         for alert_json in content['alerts']:
             parse_msg = alert_msg_handler(alert_json)
             parse_msg = parse_msg.replace("_","")
-            parse_msg = parse_msg.replace("[FIRING]", ":warning:")
-            parse_msg = parse_msg.replace("[RESOLVED]", ":white_check_mark:")
+            if "warning" in parse_msg:
+                parse_msg = parse_msg.replace("[FIRING]", "⚠️")
+            else:
+                parse_msg = parse_msg.replace("[FIRING]", "‼️")
+            parse_msg = parse_msg.replace("[RESOLVED]", "✅")
             logger.info(f"post json == > {parse_msg}")
-            bot.sendMessage(chat_id=chat_id, text=parse_msg,emoji="warning")
-            #bot.sendMessage(chat_id=chat_id, text=parse_msg, parse_mode="Markdown")
+            bot.sendMessage(chat_id=chat_id, text=parse_msg, parse_mode="Markdown")
     except:
         logger.error(f"parse error ==> {content}")
     return 'ok'
@@ -36,3 +38,4 @@ def alert():
 if __name__ == "__main__":
     # Running server
     app.run(host='0.0.0.0', port=9165)
+
