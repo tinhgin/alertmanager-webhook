@@ -18,8 +18,8 @@ def alert():
     try:
         import telegram
         # Initial bot by Telegram access token
-        bot = telegram.Bot(token="1185184098:AAFrad7huLK1PxJnWuXl9HA--dL4fyZwjj4")
-        chat_id = "-442502302"
+        bot = telegram.Bot(token="botToken")
+        chat_id = "-chatID"
         from msg import alert_msg_handler
         for alert_json in content['alerts']:
             parse_msg = alert_msg_handler(alert_json)
