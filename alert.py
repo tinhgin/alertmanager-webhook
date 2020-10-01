@@ -27,7 +27,10 @@ def alert():
             if "warning" in parse_msg:
                 parse_msg = parse_msg.replace("[FIRING]", "⚠️")
             else:
-                parse_msg = parse_msg.replace("[FIRING]", "‼️")
+                if "Watchdog" in parse_msg:
+                    parse_msg = parse_msg.replace("[FIRING]", "✅")
+                else:
+                    parse_msg = parse_msg.replace("[FIRING]", "‼️")
             parse_msg = parse_msg.replace("[RESOLVED]", "✅")
             logger.info(f"post json == > {parse_msg}")
             bot.sendMessage(chat_id=chat_id, text=parse_msg, parse_mode="Markdown")
