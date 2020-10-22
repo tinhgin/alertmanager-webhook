@@ -34,8 +34,9 @@ def alert():
             parse_msg = parse_msg.replace("[RESOLVED]", "✅")
             logger.info(f"post json == > {parse_msg}")
             bot.sendMessage(chat_id=chat_id, text=parse_msg, parse_mode="Markdown")
-    except:
+    except Exception as e:
         logger.error(f"parse error ==> {content}")
+        logger.error(e)
     return 'ok'
 
 if __name__ == "__main__":
